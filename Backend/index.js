@@ -16,7 +16,9 @@ app.use(express.json());
 // const jwt = require('jsonwebtoken');
 
 app.use(cors({
-    origin : '*',
+    origin : ["https://movie-streaming-app-frontend.vercel.app"],
+    methods : ['GET', 'POST'],
+    credentials : true
 }));
 
 app.get('/', (req, res) => {
