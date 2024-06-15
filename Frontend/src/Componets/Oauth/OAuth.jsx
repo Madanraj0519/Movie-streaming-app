@@ -5,6 +5,7 @@ import { app } from "../../firebase";
 import { useDispatch } from "react-redux";
 import { signInFailure, signInSuccess } from "../../features/Auth/userAuthSlice";
 import { useNavigate } from "react-router-dom";
+import {toast} from "react-hot-toast";
 
 
 const OAuth = () => {
@@ -23,9 +24,16 @@ const OAuth = () => {
             });
             console.log(res);
             dispatch(signInSuccess(res.data));
+            toast.success(res.data.message);
             navigate('/home');
         } catch (error) {
             console.log("Could not login with google auth", error);
+            toast(
+                "Unfortunately, the google OAuth provider is not supporting, so Please do normal login or sign up ",
+                {
+                  duration: 6000,
+                }
+              );
         }
     }
 

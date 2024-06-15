@@ -5,6 +5,7 @@ import {useNavigate} from "react-router"
 import { useDispatch, useSelector } from 'react-redux';
 import axiosInstance from "../Constant/Backend/axiosInstance";
 import OAuth from '../Componets/Oauth/OAuth';
+import {toast} from "react-hot-toast";
 
 const SignIn = () => {
 
@@ -41,10 +42,12 @@ const SignIn = () => {
       
       if(response.data.success === false){
         dispatch(signInFailure(response.data));
+        toast.error(response.data.message);
         setError(response.data.message);
       }
 
       dispatch(signInSuccess(response.data));
+      toast.success(response.data.message);
       navigate("/home");
       
     } catch (error) {
