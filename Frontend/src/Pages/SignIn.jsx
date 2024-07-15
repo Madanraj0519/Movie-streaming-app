@@ -22,11 +22,13 @@ const SignIn = () => {
 
     if(!email){
       setError("Please enter a valid email");
+      toast.error("Please enter a valid email");
       return;
     }
 
     if(!password){
       setError("Please enter a valid password");
+      toast.error("Please enter a valid password");
       return;
     }
 
@@ -59,7 +61,7 @@ const SignIn = () => {
   
   return (
     <div className='container w-full overflow-hidden flex flex-col text-center'>
-        <div  className='w-2/5 mx-auto pt-2 mt-10'>
+        <div  className='md:w-2/5 mx-auto pt-2 mt-10'>
           <h1 className='text-3xl text-center font-semibold my-7'>Sign In</h1>
            <form onSubmit={handleLogin} className='flex flex-col gap-4'>
                 <input type='text-' placeholder='User Email' value={email}

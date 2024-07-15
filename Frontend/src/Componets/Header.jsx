@@ -14,6 +14,8 @@ import {useNavigate} from "react-router-dom";
 import { Link } from 'react-router-dom';
 import axiosInstance from "../Constant/Backend/axiosInstance";
 import { getInitials } from '../utilities/helper';
+import { TbProgressHelp } from "react-icons/tb";
+import toast from 'react-hot-toast';
 
 function Header() {
     const [toggle,setToggle]=useState(false);
@@ -31,6 +33,40 @@ function Header() {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    const handleHelpButton = () => {
+        toast.custom((t) => (
+            <div
+              className={`${
+                t.visible ? 'animate-enter' : 'animate-leave'
+              } max-w-md w-full bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+            >
+              <div className="flex-1 w-0 p-4">
+                <div className="flex items-start">
+                  <div className="ml-3 flex-1">
+                    <h4 className='text-md font-medium text-gray-900'>Custom user</h4>
+                    <p className="mt-2 text-sm font-medium text-gray-900">
+                      UserEmail : madan__raj@hotmail.com
+                    </p>
+                    <p className="mt-1 text-sm font-medium text-gray-900">
+                      UserPassword : madan
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="flex border-l border-gray-200">
+                <button
+                  onClick={() => toast.dismiss(t.id)}
+                  className="w-full border border-transparent rounded-none rounded-r-lg p-4 
+                  flex items-center justify-center text-sm font-medium text-zinc-100 
+                  hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          ))
     }
 
     const menu=[
@@ -117,8 +153,9 @@ function Header() {
         </div>
             </> : 
             <>
-              <button className='bg-black py-2 px-4 uppercase border text-white border-[#f9f9f9] rounded-lg duration-200 cursor-pointer
-               hover:bg-[#f9f9f9] hover:text-[#000] border-transparent'>Login</button>
+              <button onClick={handleHelpButton} className='bg-black flex justify-center items-center gap-3
+               py-2 px-4 uppercase border text-white border-[#f9f9f9] rounded-lg duration-200 cursor-pointer
+               hover:bg-[#f9f9f9] hover:text-[#000] border-transparent'>Help <TbProgressHelp className='text-2xl' /></button>
             </>
         }
     </div>

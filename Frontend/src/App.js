@@ -15,7 +15,8 @@ import UserPrivateRoute from './PrivateRoute/UserPrivateRoute';
 function App() {
   return (
   
-      <BrowserRouter>
+      <>
+        <BrowserRouter>
         <Header />
         <Routes>
 
@@ -33,8 +34,8 @@ function App() {
         </Routes>
 
         <Toaster position="top-right" reverseOrder={true} />
-        
-      </BrowserRouter>
+        </BrowserRouter> 
+      </>
   );
 }
 
