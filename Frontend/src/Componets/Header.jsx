@@ -103,8 +103,10 @@ function Header() {
   return (
     <div className='flex items-center justify-between p-5'>
         <div className='flex justify-evenly gap-8 items-center'>
+          <Link to={currentUser ? "/home" : "/"}>
           <img src={logo} className='w-[80px] 
            md:w-[115px] object-cover' />
+          </Link>
          {
             currentUser ? 
             <>

@@ -28,7 +28,7 @@ const Login = () => {
   return (
     <div className='relative w-full h-full'>
       <div className='relative top-0 left-0 w-full h-full bg-[#0f0e0eea]'></div>
-       <video className='fixed w-full h-screen object-cover' src={bgVideos[randomIndex]} autoPlay loop muted/>
+        <video className='fixed w-full h-screen object-cover' src={bgVideos[randomIndex]} autoPlay loop muted/>
        <div className='absolute w-full h-full top-48 flex-col justify-center items-center'>
        <div className='content mb-9 w-full relative min-h-full box-border flex justify-center items-center flex-col py-20 px-10 h-full'>
            <div className='CTA max-w-2xl w-full flex flex-col'>
@@ -46,7 +46,7 @@ const Login = () => {
                 </div>
                 <img className='logoTwo max-w-[800px] inline-block w-full' alt="" src={Logo2} />
             </div>
-        </div>
+       </div>
        </div>
     </div>
   )

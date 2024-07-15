@@ -61,7 +61,7 @@ const SignIn = () => {
   
   return (
     <div className='container w-full overflow-hidden flex flex-col text-center'>
-        <div  className='md:w-2/5 mx-auto pt-2 mt-10'>
+      <div  className='md:w-2/6 mx-auto pt-2 mt-10 border-2 bg-[#e4dfdf2e] rounded-lg border-[#e4dfdf8c] p-4'>
           <h1 className='text-3xl text-center font-semibold my-7'>Sign In</h1>
            <form onSubmit={handleLogin} className='flex flex-col gap-4'>
                 <input type='text-' placeholder='User Email' value={email}
@@ -70,7 +70,7 @@ const SignIn = () => {
                 onChange={(e) => setPassword(e.target.value)} id='userPassword' className=' p-3 rounded-lg' />
                 <button type='submit' className='bg-slate-900 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>Sign In</button>
                 <OAuth />
-       </form>
+          </form>
       <div className='md:flex gap-2 mt-5'>
         <p>Dont Have a account?</p>
         <Link to={'/sign-up'}>
@@ -78,7 +78,7 @@ const SignIn = () => {
         </Link>
       </div>
       <p className='text-red-500 mt-5'>{error ? error || 'something went wrong' : ''}</p>
-    </div>
+      </div>
     </div>
   )
 }

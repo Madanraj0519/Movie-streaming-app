@@ -54,7 +54,7 @@ const Details = () => {
           videos.length > 0 ? 
           (
             <iframe src={`https://www.youtube.com/embed/${videos[randomVideo].key}?autoplay=${playAudio ? "1" : "0"}&loop=1&controls=0&mute=0`} 
-            frameborder="0" allow="autoplay; encrypted-media" className='w-full h-[100vh] pointer-events-none'></iframe>
+            frameborder="0" allow="autoplay; encrypted-media" className='w-full h-screen pointer-events-none'></iframe>
           ) : (
             <img src={`${IMAGE_BASE_URL}${selectedMovie.backdrop_path
             }`} alt={selectedMovie.original_title}
@@ -62,7 +62,7 @@ const Details = () => {
           )
         }
       </div>
-      <div className='content max-w-[874px] absolute top-80 p-4'>
+      <div className='content max-w-[874px] absolute top-48 p-4'>
         <div className='control flex items-center gap-5 flex-row flex-nowrap my-6 m-0 min-h-[56px] '>
           <div onClick={() => setPlayAudio(!playAudio)} className='player text-base mb-5 h-14 rounded-md cursor-pointer flex p-6
           items-center justify-center gap-2 space-x-1 text-center uppercase bg-[#00000099] hover:bg-zinc-900 border-none text-white'>
