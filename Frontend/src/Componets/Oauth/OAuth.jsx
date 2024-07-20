@@ -3,7 +3,7 @@ import axiosInstance from "../../Constant/Backend/axiosInstance"
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth"
 import { app } from "../../firebase";
 import { useDispatch } from "react-redux";
-import { signInFailure, signInSuccess } from "../../features/Auth/userAuthSlice";
+import { signInSuccess } from "../../features/Auth/userAuthSlice";
 import { useNavigate } from "react-router-dom";
 import {toast} from "react-hot-toast";
 

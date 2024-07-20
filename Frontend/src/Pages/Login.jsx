@@ -33,7 +33,7 @@ const Login = () => {
        <div className='content mb-9 w-full relative min-h-full box-border flex justify-center items-center flex-col py-20 px-10 h-full'>
            <div className='CTA max-w-2xl w-full flex flex-col'>
                 <img className='logoOne mb-3 text-center max-w-2xl min-h-0 block w-full' alt='' src={Logo} />
-                <Link to={'/sign-in'}>
+                <Link to={'/home'}>
                 <button className='signUp font-bold text-[#f9f9f9] mb-3 w-full space-x-2 text-xl py-3 
                 border border-transparent cursor-pointer bg-[#0667e7] hover:bg-[#0483ee]'>GET ALL THERE</button>
                 </Link>

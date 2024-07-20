@@ -6,6 +6,8 @@ import movieDetailReducer from "../features/Movie/movieDetail";
 import movieVideoReducer from "../features/Movie/movieVideo";
 import watchListReducer from "../features/WatchList/watchList";
 import SearchReducer from "../features/Movie/searchMovie";
+import castReducer from "../features/Movie/castSlice";
+import actorReducer from "../features/Movie/actorDetails";
 import storage from "redux-persist/lib/storage";
 
 
@@ -17,6 +19,9 @@ const rootReducer = combineReducers({
         movieVideos: movieVideoReducer,
         watchList : watchListReducer,
         search: SearchReducer,
+        castDetails : castReducer,
+        actorDetails : actorReducer,
+
 })
 
 const persistConfig = {
