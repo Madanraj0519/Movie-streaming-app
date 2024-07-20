@@ -31,11 +31,27 @@ export const fetchTrendingMovies = createAsyncThunk(
     }
 );
 
+export const fetchTrendingSeries = createAsyncThunk(
+    'movies/fetchTrendingSeries',
+    async () => {
+        try{
+            const res = await axios.get(
+                `${BASE_URL}/tv/airing_today?api_key=${API_KEY}`
+            );
+            return res.data.results;
+        }catch(error) {
+            throw new Error("failed to fetch upcoming movies");
+        }
+    }
+);
+
+
 const moviesSlice = createSlice({
    name:"movies",
    initialState:{
     upcomingMovies:[],
     trendingMovies:[],
+    trendingSeries : [],
     loading:false,
     error:null,
    },
@@ -53,6 +69,10 @@ const moviesSlice = createSlice({
     .addCase(fetchTrendingMovies.fulfilled, (state, action) =>{
         state.loading = false;
         state.trendingMovies = action.payload;
+    })
+    .addCase(fetchTrendingSeries.fulfilled, (state, action) =>{
+        state.loading = false;
+        state.trendingSeries = action.payload;
     })
     .addCase(fetchUpcomingMovies.rejected, (state, action) =>{
         state.loading = false;

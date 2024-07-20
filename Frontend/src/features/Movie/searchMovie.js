@@ -31,11 +31,26 @@ export const fetchSearchSeries = createAsyncThunk(
     }
 );
 
+export const fetchProductionMovie = createAsyncThunk(
+    'search/fetchProductionMovie',
+     async(searchMovie) => {
+        try{
+            const response = await axios.get(
+                `${BASE_URL}/search/movie?query=${searchMovie}&api_key=${API_KEY}`
+            )
+            return response.data.results;
+        }catch(err){
+            throw new Error("Error in fetching search movie");
+        }
+    }
+);
+
 const searchSlice = createSlice({
     name:"search",
     initialState:{
         Query:'',
         searchResult : [],
+        productionMovie : [],
         loading: false,
         error : null,
     },
@@ -59,7 +74,20 @@ const searchSlice = createSlice({
             state.loading = false;
             state.Query = action.payload;
             state.searchResult = action.payload;
-        });
+        })
+        .addCase(fetchProductionMovie.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+        .addCase(fetchProductionMovie.fulfilled, (state, action) =>{
+            state.loading = false;
+            state.Query = action.payload;
+            state.productionMovie = action.payload;
+        })
+        .addCase(fetchProductionMovie.rejected, (state, action) =>{
+            state.loading = false;
+            state.error = action.error.message;
+        })
     }
 });
 

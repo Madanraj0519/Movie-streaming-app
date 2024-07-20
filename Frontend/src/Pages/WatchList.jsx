@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import {AiTwotoneDelete} from "react-icons/ai";
@@ -21,18 +21,18 @@ const WatchList = () => {
      scrollbar-none scroll-smooth pt-4 px-8 pb-4'>
      {
         watchListMovies.map((movie) => (
-       <div className='relative'>
+      <div className='relative'>
         <Link to={`/detail/${movie.id}`}>
           <div className='w-[110px] md:w-[200px] rounded-lg relative
             hover:border-[3px] border-gray-400 cursor-pointer
             hover:scale-110 transition-all duration-150 ease-in'>
-            <img src={IMAGE_BASE_URL+movie.poster_path} />
+            <img src={IMAGE_BASE_URL+movie.poster_path} loading='lazy' alt='' />
           </div>
         </Link>
         <div className='absolute -bottom-3 -right-1 w-12 h-12 p-2 cursor-pointer
            rounded-full bg-[#000000d2]' onClick={() => handleWatchList(movie.id)}>
           <AiTwotoneDelete className='text-3xl text-white' />
-          </div>
+        </div>
        </div>
         ))
      }
