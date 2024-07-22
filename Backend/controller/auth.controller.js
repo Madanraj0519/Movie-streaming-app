@@ -8,7 +8,7 @@ const userModel = require('../models/user.model');
 const createToken = (id) => {
     const jwtSecretKey = process.env.JWT_SECRET_TOKEN;
 
-    return jwt.sign({id}, jwtSecretKey);
+    return jwt.sign({id}, jwtSecretKey, {expiresIn : "36000m"});
 }
 
 
@@ -32,15 +32,11 @@ const registerUser = async(req, res, next) => {
 
         await user.save();
 
-        const token = createToken(user._id);
-        const expireDate = new Date(Date.now() + 15 * 24 * 3600 * 1000);
-
-        res.cookie('access_token', token, {httpOnly : true, expires : expireDate })
-        .status(200).json({
+        return res.status(200).json({
             success: true,
             message : "User registered successfully",
             user,
-            token,
+            accessToken,
         });
     } catch (error) {
         next(error);
@@ -68,15 +64,13 @@ const loginUser = async(req, res, next) => {
 
         const { password : hashedPassword, ...user } = validUser._doc;
 
-        const token = createToken(user._id);
-        const expireDate = new Date(Date.now() + 15 * 24 * 3600 * 1000);
+        const accessToken = createToken(user._id);
 
-        res.cookie('access_token', token, { httpOnly : true, expires : expireDate})
-        .status(200).json({
+        res.status(200).json({
             success : true,
             message : `Welcome, ${user.userName}!!`,
             user,
-            token,
+            accessToken,
         });
     } catch (error) {
         next(error);
