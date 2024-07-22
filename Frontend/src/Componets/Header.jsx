@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import logo from './../assets/Images/logo.png'
+import logo from './../assets/Images/logo.jpeg'
 import { HiHome,
     HiMagnifyingGlass,
     HiPlayCircle,
@@ -107,12 +107,12 @@ function Header() {
         <div className='flex justify-evenly gap-8 items-center'>
           <Link to={"/"}>
           <img src={logo} alt='logo' className='w-[80px] 
-           md:w-[115px] object-cover' />
+           md:w-[55px] md:h-[55px] object-cover rounded-full' />
           </Link>
          {
             currentPath.pathname !== '/' ? 
             <>
-    <div className='hidden top-3 md:flex gap-8'>
+    <div className='hidden mt-3 md:flex gap-8'>
         {menu.map((item)=>(
             <Link to={item.link} key={item.id}>
               <HeaderItem name={item.name} Icon={item.icon} />
@@ -150,9 +150,22 @@ function Header() {
               (
              <>
               <Link to={'/admin/profile'} className='relative  h-8 w-8 md:h-12 md:w-12 flex cursor-pointer items-center justify-end'>
-             <h4 className='w-full h-full rounded-full bg-slate-500 text-zinc-100 flex justify-center
-             items-center text-xl'>{getInitials(currentUser.user.userName)}</h4>
-           </Link>
+                {
+                  currentUser.user.url ? 
+                  (
+                    <>
+                    <img src={currentUser.user.url}
+                      className='w-full h-full rounded-full bg-slate-500 border-2 border-zinc-500 text-zinc-100 flex justify-center
+                      items-center text-xl'/>
+                    </>
+                  ) : (
+                    <>
+                      <h4 className='w-full h-full rounded-full bg-slate-500 text-zinc-100 flex justify-center
+                          items-center text-xl'>{getInitials(currentUser.user.userName)}</h4>
+                    </>
+                  )
+                }
+              </Link>
              </>
               ) : (
                 <Link to={'/sign-in'}>

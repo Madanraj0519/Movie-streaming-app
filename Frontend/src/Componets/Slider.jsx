@@ -8,10 +8,10 @@ function Slider({movies}) {
     const elementRef=useRef();
 
     const sliderRight=(element)=>{
-        element.scrollLeft+=screenWidth-110
+        element.scrollLeft+=screenWidth-50
     }
     const sliderLeft=(element)=>{
-        element.scrollLeft-=screenWidth-110
+        element.scrollLeft-=screenWidth-50
     }
 
   return (
@@ -27,14 +27,14 @@ function Slider({movies}) {
 
    
     <div className='scroll flex overflow-x-auto w-full px-2 md:px-16 py-2 md:py-4
-    scrollbar-none scroll-smooth' ref={elementRef}> 
+    scrollbar-none scroll-smooth cursor-pointer' ref={elementRef}> 
         {movies.map((item)=>(
             <>
             <img src={IMAGE_BASE_URL+item.backdrop_path} 
             className='min-w-full  md:h-[410px] object-center
-             mr-5 rounded-md hover:border-[4px]
+             mr-5 rounded-md hover:border-[4px] cursor-pointer
             border-gray-400 transition-all duration-100 ease-in'
-            loading='lazy' alt={item.original_name}/>
+            loading='lazy' />
              </>   
         ))}
     </div>

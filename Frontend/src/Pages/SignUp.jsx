@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axiosInstance from "../Constant/Backend/axiosInstance";
 import {toast} from "react-hot-toast";
 import OAuth from '../Componets/Oauth/OAuth';
+import ProfileSlider from './ProfileSlider';
 
 const SignUp = () => {
 
@@ -13,6 +14,10 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [isActive, setIsActive] = useState(false);
+
+
+  const {currentUser} = useSelector((state) => state.authUser);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -54,7 +59,7 @@ const SignUp = () => {
 
       dispatch(signInSuccess(response.data));
       toast.success(response.data.message);
-      navigate("/home");
+      // setIsActive(true);
 
     } catch (error) {
       dispatch(signInFailure(error));
@@ -85,6 +90,12 @@ const SignUp = () => {
       </div>
       <p className='text-red-500 mt-5'>{error ? error.message || 'something went wrong' : ''}</p>
         </div>
+
+        {
+          currentUser && (
+            <ProfileSlider />
+          )
+        }
     </div>
   )
 }

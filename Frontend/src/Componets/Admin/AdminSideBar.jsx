@@ -25,7 +25,7 @@ const AdminSideBar = ({ setActive, active }) => {
   }
 
   return (
-    <div className="md:w-full w-[300px] h-[60px] md:h-full flex md:flex-col justify-center ml-12
+    <div className="md:w-full w-[300px] h-[60px] md:h-full flex md:flex-col justify-center ml-6
      md:ml-0 bg-[#090e3db0] shadow-sm rounded-[5px] md:p-4 pt-8">
       <div
         className={`flex items-center ${active === 1  ? 'md:bg-[#e7e3e3ed]' : 'md:hover:bg-[#000000c4]'} cursor-pointer w-full md:w-auto mb-4  md:h-12 px-2
