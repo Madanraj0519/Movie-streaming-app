@@ -5,17 +5,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchMovieDetails } from '../features/Movie/movieDetail';
 import {fetchMovieVideos} from "../features/Movie/movieVideo";
-// import {addToWatchList} from "../features/WatchList/watchList";
 import {fetchCastFromMovie} from "../features/Movie/castSlice";
 import {FaRegPlayCircle} from "react-icons/fa";
 import { IoCalendarOutline } from "react-icons/io5";
 import { CiClock1 } from "react-icons/ci";
-import { FaHouse } from "react-icons/fa6";
+import { FaHouse, FaHeart } from "react-icons/fa6";
 import { FaUserFriends } from "react-icons/fa";
 import { LuView } from "react-icons/lu";
 import StarRating from '../Componets/StarRating';
 import Loading from '../Componets/Loading';
 import ErrorContainer from '../Componets/ErrorContainer';
+import {fetchFavoriteMovies} from "../features/WatchList/watchList";
 
 
 const Details = () => {
@@ -26,7 +26,7 @@ const Details = () => {
   const {selectedCast, loading : castLoading, error: castError, } = useSelector((state) => state.castDetails);
 
 
-  // console.log(selectedMovie);
+  console.log(selectedMovie);
   // console.log(selectedCast);
   // console.log(actorDetails);
 
@@ -36,10 +36,11 @@ const Details = () => {
     dispatch(fetchMovieVideos(id));
   },[dispatch, id]);
 
-  // const handleWatchList = (movie) => {
-  //     dispatch(addToWatchList(movie));
-  //     setActive(true);
-  // }
+  const handleWatchList = (movie) => {
+    dispatch(fetchFavoriteMovies(movie));
+    console.log(movie);
+  }
+
 
   if (loading || castLoading) {
     return <Loading />;
@@ -118,9 +119,15 @@ const Details = () => {
                  </div>
               </div>
               <div className='mx-20 md:mx-0'>
-                <p className='mt-3 p-1 flex items-center gap-2 bg-red-600 w-20 text-center rounded-md'>
+               <div className='flex justify-start gap-5 items-center '>
+                <div className='mt-3 p-2 flex items-center gap-2 cursor-pointer bg-red-600 w-10 h-10 
+                text-center rounded-md hover:bg-black hover:text-white transition-all duration-100 scale-95' onClick={() => handleWatchList(selectedMovie)}>
+                  <FaHeart className='text-2xl' />
+                </div>
+                <p className='mt-3 p-1 flex items-center gap-2 bg-red-600 w-20 text-center rounded-md' onClick={() => handleWatchList(selectedMovie)}>
                   <LuView className='text-2xl' />{(selectedMovie.popularity).toFixed(0)}K
                 </p>
+               </div>
                 <StarRating stars={(selectedMovie.vote_average / 2).toFixed(0)} />
               </div>
           </div>

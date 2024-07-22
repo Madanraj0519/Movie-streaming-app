@@ -18,6 +18,7 @@ import AdminPage from './Pages/AdminPage';
 import VideoPlayer from './Componets/VideoPlayer';
 import Footer from './Componets/Footer';
 
+
 function App() {
   return (
   
@@ -37,10 +38,10 @@ function App() {
            <Route path='/search' element={<Search />} />
            <Route path='/series' element={<Series />} />
            <Route path='/productionMovies/:id/:url' element={<ProductionHouseMovies />} />
-           <Route path='/watch/:id' element={<VideoPlayer />} />
+           <Route path='/watch/:id' element={<VideoPlayer />} /> 
           
            <Route element={<UserPrivateRoute />}>
-             <Route path='/admin/profile' element={<AdminPage />} />        
+             <Route path='/admin/profile' element={<AdminPage />} />       
            </Route>
 
         </Routes>

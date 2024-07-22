@@ -129,7 +129,6 @@ const googleAuth = async(req, res, next) => {
     }
 };
 
-
 const signOut = (req, res, next) => {
     res.clearCookie('access_token').status(200)
     .json(({

@@ -2,7 +2,7 @@ import React from 'react';
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { Link } from 'react-router-dom';
-import logo from './../assets/Images/logo.png'
+import logo from './../assets/Images/logo.jpeg'
 
 const Footer = () => {
   return (
@@ -39,7 +39,7 @@ const Footer = () => {
         </div>
         <div className='flex flex-col justify-start items-start text-zinc-600 gap-4'>
           <img src={logo} className='w-[80px] 
-            md:w-[115px] object-cover' alt='logo' />
+           md:w-[55px] md:h-[55px] object-cover rounded-full' alt='logo' />
           <a href='https://github.com/Madanraj0519' 
           className='flex justify-center items-center gap-2 text-zinc-600 hover:text-red-500'><FaGithub className='text-xl' />Madanraj0519</a>
           <a href='https://www.linkedin.com/in/madanraj-7b8b23232/'

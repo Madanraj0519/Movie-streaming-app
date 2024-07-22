@@ -13,10 +13,21 @@ const userModel = mongoose.Schema({
         type : String,
         required : true,
     },
+    phoneNumber : {
+        type : String,
+    },
+    url : {
+        type : String,
+    },
     createdOn : {
         type : Date,
         default : new Date().getTime(),
+    },
+    isUpdate : {
+        type : Boolean,
+        default : false,
     }
 });
+
 
 module.exports = mongoose.model('User', userModel);
