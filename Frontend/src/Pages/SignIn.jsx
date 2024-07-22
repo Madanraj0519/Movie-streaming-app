@@ -50,6 +50,7 @@ const SignIn = () => {
 
       dispatch(signInSuccess(response.data));
       toast.success(response.data.message);
+      localStorage.setItem("token", response.data.accessToken);
       navigate("/home");
       
     } catch (error) {
