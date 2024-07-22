@@ -59,6 +59,7 @@ const SignUp = () => {
 
       dispatch(signInSuccess(response.data));
       toast.success(response.data.message);
+      localStorage.setItem("token", response.data.accessToken);
       // setIsActive(true);
 
     } catch (error) {
