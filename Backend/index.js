@@ -19,7 +19,8 @@ app.use(cookieParser());
 // const jwt = require('jsonwebtoken');
 
 app.use(cors({
-    origin : ["https://movie-streaming-app-frontend.vercel.app"],
+    // origin : ["https://movie-streaming-app-frontend.vercel.app"],
+    origin : [""],
     methods : ['GET', 'POST'],
     credentials : true
 }));

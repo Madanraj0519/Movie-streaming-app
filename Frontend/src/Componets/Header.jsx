@@ -106,7 +106,7 @@ function Header() {
     <div className='flex items-center justify-between p-5 shadow-lg shadow-gray-700'>
         <div className='flex justify-evenly gap-8 items-center'>
           <Link to={"/"}>
-          <img src={logo} alt='logo' className='w-[80px] 
+          <img src={logo} alt='logo' className='w-[30px] sm:w-[40px] h-[30px] sm:h-[40px] 
            md:w-[55px] md:h-[55px] object-cover rounded-full' />
           </Link>
          {
@@ -128,7 +128,7 @@ function Header() {
          <div className='md:hidden' onClick={()=>setToggle(!toggle)}>       
             <HeaderItem name={''} Icon={HiDotsVertical} />
            {toggle? <div className='absolute mt-3 bg-[#121212] 
-            border-[1px] border-gray-700 p-3 px-5 py-4'>
+            border-[1px] border-gray-700 p-3 px-5 py-4 right-0 '>
             {menu.map((item,index)=>index>2&&(
              <Link to={item.link} key={item.id}>
                <HeaderItem name={item.name} Icon={item.icon} />

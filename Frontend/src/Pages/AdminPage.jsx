@@ -14,12 +14,12 @@ const AdminPage = () => {
           <Loading />
         ) : (
            <>
-            <div className={`w-11/12 mx-4 md:mx-14 flex flex-col md:flex-row justify-center
-                gap-2 md:gap-4 items-start h-full py-4 mt-10`}>
+            <div className={`w-11/12 mx-4 md:mx-14 flex flex-col md:flex-row justify-center md:items-center
+                gap-2 md:gap-4 lg:items-start h-full py-4 mt-10`}>
                <div className="w-[50px] md:w-[335px] sticky">
                  <AdminSideBar active={active} setActive={setActive} />
                </div>
-              <ProfilePage active={active} />
+               <ProfilePage active={active} />
             </div>
           </>
         )} 

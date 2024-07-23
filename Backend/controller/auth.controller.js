@@ -19,7 +19,7 @@ const registerUser = async(req, res, next) => {
         let user = await userModel.findOne({email});
 
         if(user){
-            return next(errorHandler(400, 'user with this name already registered'));
+            return next(errorHandler(400, 'user with this email already registered'));
         }
 
         const hashedPassword = bcrypt.hashSync(password);
@@ -31,6 +31,8 @@ const registerUser = async(req, res, next) => {
         });
 
         await user.save();
+
+        const accessToken = createToken(user._id);
 
         return res.status(200).json({
             success: true,
