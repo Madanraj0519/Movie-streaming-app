@@ -135,7 +135,7 @@ const Details = () => {
                  </div>
               </div>
               <div className='mx-20 md:mx-0'>
-               <div className='flex justify-start gap-5 items-center '>
+               <div className='flex justify-center  md:justify-start gap-5 items-center '>
                 <div className='mt-3 p-2 flex items-center gap-2 cursor-pointer bg-red-600 w-10 h-10 
                 text-center rounded-md hover:bg-black hover:text-white transition-all duration-100 scale-95' onClick={() => handleWatchList(selectedMovie)}>
                   <FaHeart className='text-2xl' />
@@ -144,7 +144,9 @@ const Details = () => {
                   <LuView className='text-2xl' />{(selectedMovie.popularity).toFixed(0)}K
                 </p>
                </div>
-                <StarRating stars={(selectedMovie.vote_average / 2).toFixed(0)} />
+                <div className='flex justify-center md:justify-start items-center'>
+                  <StarRating stars={(selectedMovie.vote_average / 2).toFixed(0)} />
+                </div>
               </div>
           </div>
         </div>

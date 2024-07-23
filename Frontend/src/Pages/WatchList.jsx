@@ -55,7 +55,7 @@ const WatchList = () => {
   return (
    <>
     {
-      data.length < 0 ? (
+      data.length > 0 ? (
         <div className='scroll grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 overflow-x-auto overflow-clip gap-8
      scrollbar-none scroll-smooth pt-4 px-8 pb-4'>
      {
