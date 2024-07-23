@@ -3,7 +3,7 @@ const { registerUser, loginUser, signOut, googleAuth } = require('../controller/
 const authRoute = express.Router();
 
 
-authRoute.post('/create-account', registerUser);
+authRoute.post('/createAccount', registerUser);
 authRoute.post('/login', loginUser);
 authRoute.post('/google-auth', googleAuth);
 authRoute.get('/signOut', signOut);
