@@ -55,7 +55,7 @@ const WatchList = () => {
   return (
    <>
     {
-      data.length > 0 ? (
+      data.length < 0 ? (
         <div className='scroll grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 overflow-x-auto overflow-clip gap-8
      scrollbar-none scroll-smooth pt-4 px-8 pb-4'>
      {
@@ -78,12 +78,12 @@ const WatchList = () => {
     </div>
       ) : (
         <div className='w-full h-screen bg-black'>
-          <div className='flex justify-center items-center'>
+          <div className='flex justify-center items-center mx-4'>
              <div>
                 <h4 className='md:text-5xl mt-10'>Favorite movies is empty</h4>
                 <div className='flex justify-center items-center gap-2 mt-5'>
-                <p className='md:text-3xl'>Watch Movies and add it to your favorites</p>
-                <Link className='md:text-3xl' to={'/home'}>
+                <p className='text-base md:text-3xl'>Watch Movies and add it to your favorites</p>
+                <Link className='text-xl md:text-3xl' to={'/home'}>
                    <FaHandPointLeft />
                 </Link>
                 </div>

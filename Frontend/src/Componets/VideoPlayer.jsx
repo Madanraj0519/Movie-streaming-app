@@ -89,7 +89,7 @@ const VideoPlayer = () => {
               }`} alt={selectedMovie.original_title} loading='lazy'
                className='w-full h-[280px] md:h-[100vh] mt-5'/>
                <div onClick={()=>setShowVideo(false)} className='absolute top-[100px] left-[100px] md:top-[300px] md:left-[600px] opacity-100
-                bg-zinc-200 md:w-20 md:h-20 p-4 m-3 rounded-full border border-red-400 cursor-pointer'>
+                bg-zinc-200 md:w-20 md:h-20 p-5 m-4 rounded-full border border-red-400 cursor-pointer'>
                  <TbPlayerPlayFilled className=' text-xl md:text-5xl text-red-500' />
                </div>
             </div>
@@ -108,11 +108,11 @@ const VideoPlayer = () => {
               handleVideoWatch()
             )
           }
-       <div className='flex justify-between items-center w-full bg-[#090e3d80] border border-zinc-700 
-        rounded-md h-[80px] px-4 mt-5 md:mt-10'>
+       <div className='flex flex-col md:flex-row justify-between items-center w-full bg-[#090e3d80] border border-zinc-700 
+        rounded-md h-[80px] px-4 mt-5 md:mt-10 p-2'>
           <div className='flex gap-3 md:gap-5 justify-start items-center'>
               <FaBackwardFast onClick={() => handleForward("backward")} className='text-2xl md:text-3xl cursor-pointer text-zinc-300' />
-              <h3 className='text-base md:text-4xl'>{selectedMovie.original_title}</h3>
+              <h3 className='text-base md:text-4xl whitespace-nowrap'>{selectedMovie.original_title}</h3>
               <FaFastForward onClick={() => handleForward("forward")}  className='text-2xl md:text-3xl cursor-pointer text-zinc-300' />
           </div>
           <div className='flex gap-1 md:gap-3 justify-center items-center'>
