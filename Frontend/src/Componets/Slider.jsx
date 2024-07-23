@@ -11,12 +11,12 @@ function Slider({ movies }) {
   useEffect(() => {
     const interval = setInterval(() => {
       if (scrollDirection === 'right') {
-        elementRef.current.scrollLeft += screenWidth / 4;
+        elementRef.current.scrollLeft += screenWidth / 3.5;
         if (elementRef.current.scrollLeft + elementRef.current.clientWidth >= elementRef.current.scrollWidth) {
           setScrollDirection('left');
         }
       } else {
-        elementRef.current.scrollLeft -= screenWidth / 4;
+        elementRef.current.scrollLeft -= screenWidth / 3.5;
         if (elementRef.current.scrollLeft <= 0) {
           setScrollDirection('right');
         }

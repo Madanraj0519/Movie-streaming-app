@@ -17,6 +17,7 @@ import ProductionHouseMovies from './Pages/ProductionHouseMovies';
 import AdminPage from './Pages/AdminPage';
 import VideoPlayer from './Componets/VideoPlayer';
 import Footer from './Componets/Footer';
+import Subcription from './Pages/Subcription';
 
 
 function App() {
@@ -39,9 +40,11 @@ function App() {
            <Route path='/series' element={<Series />} />
            <Route path='/productionMovies/:id/:url' element={<ProductionHouseMovies />} />
            <Route path='/watch/:id' element={<VideoPlayer />} /> 
-          
+           <Route path='/admin/subscription/:id' element={<Subcription />} />   
+
            <Route element={<UserPrivateRoute />}>
              <Route path='/admin/profile' element={<AdminPage />} />       
+                 
            </Route>
 
         </Routes>
