@@ -108,14 +108,14 @@ const VideoPlayer = () => {
               handleVideoWatch()
             )
           }
-       <div className='flex flex-col md:flex-row justify-between items-center w-full bg-[#090e3d80] border border-zinc-700 
-        rounded-md h-[80px] px-4 mt-5 md:mt-10 p-2'>
-          <div className='flex gap-3 md:gap-5 justify-start items-center'>
+       <div className='flex flex-col md:flex-row justify-between md:items-center w-full bg-[#090e3d80] border border-zinc-700 
+        rounded-md h-[85px] px-4 mt-5 md:mt-10 p-2'>
+          <div className='flex gap-3 md:gap-5 justify-between md:justify-start items-center'>
               <FaBackwardFast onClick={() => handleForward("backward")} className='text-2xl md:text-3xl cursor-pointer text-zinc-300' />
               <h3 className='text-base md:text-4xl whitespace-nowrap'>{selectedMovie.original_title}</h3>
               <FaFastForward onClick={() => handleForward("forward")}  className='text-2xl md:text-3xl cursor-pointer text-zinc-300' />
           </div>
-          <div className='flex gap-1 md:gap-3 justify-center items-center'>
+          <div className='flex gap-1 md:gap-3 justify-between items-center'>
             <div className='bg-zinc-600 p-2 md:p-3 rounded-lg'>
              <FaHeart className='text-sm hover:text-red-500 
              cursor-pointer md:text-2xl' />
