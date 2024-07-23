@@ -168,11 +168,25 @@ function Header() {
               </Link>
              </>
               ) : (
-                <Link to={'/sign-in'}>
-                <button className='bg-black flex justify-center items-center gap-3
-                  py-2 px-4 uppercase border text-zinc-300 border-zinc-500 rounded-lg duration-200 cursor-pointer
-                  hover:bg-[#f9f9f9] hover:text-[#000] border-transparent'>Login</button>
-                </Link>
+                <>
+                  {
+                    currentPath.pathname !== '/sign-in' ? (
+                      <Link to={'/sign-in'}>
+                        <button className='bg-black flex justify-center items-center gap-3
+                          py-2 px-4 uppercase border text-zinc-300 border-zinc-500 rounded-lg duration-200 cursor-pointer
+                          hover:bg-[#f9f9f9] hover:text-[#000] border-transparent'>
+                            Login
+                        </button>
+                        </Link>
+                    ) : (
+                        <button onClick={handleHelpButton} className='bg-black flex justify-center items-center gap-3
+                            py-2 px-4 uppercase border text-zinc-300 border-zinc-500 rounded-lg duration-200 cursor-pointer
+                          hover:bg-[#f9f9f9] hover:text-[#000] border-transparent'>
+                            Help <TbProgressHelp className='text-2xl' />
+                        </button>
+                    )
+                  }
+                </>
               )
              }
             </> : 

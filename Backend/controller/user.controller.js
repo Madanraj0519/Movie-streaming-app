@@ -127,7 +127,7 @@ const deleteUser = async(req, res, next) => {
         
         const deleteUser = await userModel.findById(req.params.id);
 
-        console.log(deleteUser);
+        // console.log(deleteUser);
 
         const favorite = await favoriteModel.find({
             userId : req.params.id,

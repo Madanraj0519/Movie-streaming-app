@@ -16,6 +16,7 @@ import ErrorContainer from './ErrorContainer';
 const VideoPlayer = () => {
 
     const {id} = useParams();
+
     const dispatch  = useDispatch();
     const navigate = useNavigate();
     const {selectedMovie, loading, error} = useSelector((state) => state.movieDetail);
@@ -45,9 +46,9 @@ const VideoPlayer = () => {
     const handleForward = (type) => {
       let len = videos.length;
 
-      // if(nextClip > len || nextClip < 0) {
-      //   setNextClip(0);
-      // }
+      if(nextClip >= 1) {
+        navigate(`/admin/subscription/${id}`);
+      }
 
       if(type === 'forward'){
         if(nextClip > len){
@@ -89,7 +90,7 @@ const VideoPlayer = () => {
               }`} alt={selectedMovie.original_title} loading='lazy'
                className='w-full h-[280px] md:h-[100vh] mt-5'/>
                <div onClick={()=>setShowVideo(false)} className='absolute top-[100px] left-[100px] md:top-[300px] md:left-[600px] opacity-100
-                bg-zinc-200 md:w-20 md:h-20 p-5 m-4 rounded-full border border-red-400 cursor-pointer'>
+                bg-zinc-200 md:w-20 md:h-20 p-5 md:p-4 m-4 rounded-full border border-red-400 cursor-pointer'>
                  <TbPlayerPlayFilled className=' text-xl md:text-5xl text-red-500' />
                </div>
             </div>
