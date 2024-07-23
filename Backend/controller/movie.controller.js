@@ -6,15 +6,18 @@ const fetchFavoriteMovies = async(req, res, next) => {
 
   try {
 
-    const favorite = await favoriteModel.find({userId : req.user.id});
+    const favorite = await favoriteModel.find({userId : req.params.id});
 
     if(!favorite) {
-      return next(errorHandler(401, "Favorite movie not found"));
+      return res.status(400).json({
+        success: false,
+        message : "Favorite movie not found",
+      })
     }
 
     res.status(200).json({
       success : true,
-      message : "sucessfully fetched favorite movies",
+      message : "successfully fetched favorite movies",
       favorite
     });
 
@@ -36,13 +39,20 @@ const addFavoriteMovies = async(req, res, next) => {
         const { movieData } = req.body;
         let userId = req.user.id;
         let movieId = movieData.id;
-        // console.log(movieData.id);
+        // console.log(movieId);
         // console.log(userId);
 
-        const favoriteMovie = await favoriteModel.findOne({movieId});
+        const favoriteMovie = await favoriteModel.findOne({
+          "movieData.id" : movieId,
+        });
+        
+        // console.log(favoriteMovie);
 
         if(favoriteMovie){
-          return next(errorHandler(400,"This movie has already been added"));
+            res.status(400).json({
+            success: false,
+            message : "This movie has already been added",
+          })
         }
 
         const movie = new favoriteModel(
@@ -52,10 +62,12 @@ const addFavoriteMovies = async(req, res, next) => {
            }
         );
        await movie.save();
+
        res.status(201).json({ 
          success : true,
          message: 'Movie saved successfully', 
-         movie });
+         movie 
+        });
       } catch (error) {
          next(error);
       }

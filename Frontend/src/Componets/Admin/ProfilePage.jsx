@@ -27,6 +27,7 @@ const ProfilePage = ({ active }) => {
   const [password, setPassword] = useState(currentUser.user && currentUser.user.createdOn);
   const [userError, setError] = useState(null);
   const [avatarUrl, setAvatarUrl] = useState(null);
+  const [profileImage, setProfileImage] = useState(currentUser.user.url);
   const [isActive, setISActive] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -44,6 +45,7 @@ const ProfilePage = ({ active }) => {
   }
 
   const handleAvatar = (url, index) => {
+    setProfileImage(url);
     setAvatarUrl(url);
     setISActive(index);
  }
@@ -109,25 +111,25 @@ const ProfilePage = ({ active }) => {
       <div className="w-full bg-[#090e3d80] rounded-xl md:p-2 ">
           <h4 className="mx-8 text-3xl font-semibold text-red-500 pt-2">Update Profile</h4>
           <div className="flex justify-center items-center w-full py-2">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-3 md:gap-5 relative mt-4 md:mt-2">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-3 md:gap-5 relative mt-0 md:mt-2">
               <img
-                src={currentUser.user.url}
-                className="w-[80px] h-[80px] md:w-[170px] md:h-[170px] rounded-full object-cover border-[3px] border-red-500 mt-5"
+                src={profileImage}
+                className="w-[130px] h-[130px] md:w-[190px] md:h-[190px] rounded-full object-cover border-[3px] border-red-500 mt-5"
                 alt=""
               />
-              <div>
+              <div className="w-full">
                <h4 className="text-center md:text-2xl mb-2">Update your avatar</h4>
-               <div className="relative w-[270px] sm:w-[300px] md:w-[800px] border-2 border-dotted border-red-500 h-[100px]  md:h-[140px] bg-[#07051bbd] flex
-                flex-col items-center justify-center cursor-pointer">
-                <div className='scroll flex overflow-x-auto w-full mt-5 px-2 md:px-16 py-2
+               <div className="relative w-[270px] sm:w-[400px] md:w-[800px] border-2 border-dotted border-red-500 h-[140px] 
+                md:h-[180px] bg-[#07051bbd] flex flex-col items-center justify-center cursor-pointer">
+                <div className='scroll flex overflow-x-auto w-full mt-4 px-2 md:px-16 py-2
                    scrollbar-none scroll-smooth cursor-pointer' ref={elementRef}> 
                    {avatar.map((item, index)=>(
                      <>
                          <img src={item.url} onClick={() => handleAvatar(item.url, index)}
-                         className={` w-[40px] h-[40px] md:w-[90px] md:h-[90px] object-center
+                         className={` w-[80px] h-[80px] md:w-[110px] md:h-[110px] object-center
                           mr-5 rounded-full border-[3px] border-red-700 hover:border-[4px]
                          hover:border-green-400 transition-all duration-100 ease-in
-                         ${isActive === index ? "border-[4px] border-green-300" : "border-red-500"} `}
+                         ${isActive === index ? "border-[4px] border-green-500" : "border-red-500"} `}
                          loading='lazy' alt={''}/>
 
                       </>   

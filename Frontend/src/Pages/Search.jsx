@@ -45,7 +45,7 @@ const Search = () => {
 
   return (
     <div>
-        <div className='relative scroll  flex w-full md:px-10 md:py-4
+        <div className='relative overflow-x-hidden flex w-full md:px-10 md:py-4
         scrollbar-none scroll-smooth shadow-2xl shadow-gray-800'>
           <div className='w-full opacity-40'>
           <img className='min-w-full h-[280px] md:h-[410px] object-cover md:object-center
@@ -74,14 +74,16 @@ const Search = () => {
         </div>
        
 
-        <div className='flex justify-end md:px-20 mb-10'>
-          <div className='relative'>
-           <select value={searchType} onChange={(e) => setSearchType(e.target.value)}>
+        <div className='flex justify-end md:px-5 mb-10 px-4 mt-5 w-full'>
+          <div className='relative w-[100px]bg-red-500'>
+           <select className=' bg-[#090e3db0] border border-red-400 rounded-md w-[100px] md:w-[200px] h-[30px] md:h-[30px] cursor-pointer text-center 
+           hover:bg-slate-100 hover:text-red-500 md:text-xl' value={searchType} onChange={(e) => setSearchType(e.target.value)}>
              <option value="movie">Movie</option>
              <option value="tv">TV Show</option>
           </select>
           </div>
         </div>
+
         <div className='px-9 mb-4 text-2xl'>
           <h2 className='font-semibold'>{`Your ${searchType === "movie" ? "Movies" : "Tv Shows"} Search result`}</h2>
         </div>

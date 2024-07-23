@@ -84,7 +84,15 @@ export const avatar = [
       url : "https://cdn.dribbble.com/userupload/3068062/file/original-59fd63a6870c443b01d74cf186f8280a.png?resize=400x0"
     },
     {
+      id : 32,
+      url : "https://c4.wallpaperflare.com/wallpaper/621/286/348/keanu-reeves-keanu-reeves-parabellum-john-wick-john-wick-hd-wallpaper-preview.jpg"
+    },
+    {
       id : 38,
       url : "https://images2.alphacoders.com/947/thumb-1920-947385.jpg"
+    },
+    {
+      id : 40,
+      url : "https://i.pinimg.com/736x/f8/87/6a/f8876a54e6545e204b5ec79336393d90.jpg"
     },
   ]

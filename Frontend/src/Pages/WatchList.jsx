@@ -1,53 +1,49 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux/es/hooks/useSelector';
 import {AiTwotoneDelete} from "react-icons/ai";
-import {fetchWatchListMovies} from "../features/WatchList/watchList";
-import { useDispatch} from 'react-redux';
 import {toast} from "react-hot-toast";
 import axiosInstance from "../Constant/Backend/axiosInstance";
 import { FaHandPointLeft } from "react-icons/fa6";
+import { BASE_BACKEND_URL } from '../Constant/Backend/constant';
+import { useSelector } from 'react-redux';
 const IMAGE_BASE_URL="https://image.tmdb.org/t/p/original";
+
 
 const WatchList = () => {
 
-    const dispatch  = useDispatch();
     const [userError, setError] = useState(null);
     const [isDeleted, setIsDeleted] = useState(false);
     const [data, setData] = useState([]);
     const navigate = useNavigate();
 
-    const { watchListMovies } = useSelector((state) => state.watchList);
-    console.log(watchListMovies);
+    const { currentUser } = useSelector(state => state.authUser);
+
+    // console.log(currentUser.user._id);
 
     useEffect(() => {
-      dispatch(fetchWatchListMovies());
-
-      const fetchWatchListMovies = async() => {
-
-        try {
-          const response = await axiosInstance.get('/api/movie/getFavorite');
-          setData(response.data);
-       } catch (error) {
-           return error.message;
-       }
-
+      const fetchMovies = async() => {
+        const res = await fetch(`${BASE_BACKEND_URL}/api/movie/getFavorite/${currentUser.user._id}`);
+        const data = await res.json();
+        setData(data.favorite);
       }
-    }, [dispatch]);
 
-    console.log(data);
+      fetchMovies();
+
+    }, [isDeleted]);
+
+    // console.log(data);
 
 
     const deleteWatchList = async(movieId) => {
       try{
         const response = await axiosInstance.delete(`/api/movie/deleteFavorite/${movieId}`);
   
-        if(response.data.success === false){
+        if(!response){
           toast.error(response.data.message);
           setError(response.data.message);
         }
   
-        toast.success(response.data.message);
+        toast.success("Movie added successfully");
         setIsDeleted(!isDeleted);
         navigate("/watchlist");
   
@@ -59,11 +55,11 @@ const WatchList = () => {
   return (
    <>
     {
-      watchListMovies ? (
-        <div className='scroll grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 overflow-x-auto overflow-clip gap-8
+      data.length > 0 ? (
+        <div className='scroll grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 overflow-x-auto overflow-clip gap-8
      scrollbar-none scroll-smooth pt-4 px-8 pb-4'>
      {
-        watchListMovies.favorite.map((movie) => (
+        data.map((movie) => (
       <div className='relative'>
         <Link to={`/detail/${movie.movieData.id}`}>
           <div className='w-[110px] md:w-[200px] rounded-lg relative

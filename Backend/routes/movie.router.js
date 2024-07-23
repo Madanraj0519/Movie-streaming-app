@@ -5,7 +5,7 @@ const {verifyToken} = require("../utilities/verifyToken");
 
 
 movieRoute.post('/addFavorite', verifyToken ,addFavoriteMovies);
-movieRoute.get('/getFavorite', verifyToken, fetchFavoriteMovies);
+movieRoute.get('/getFavorite/:id', fetchFavoriteMovies);
 movieRoute.delete('/deleteFavorite/:id', verifyToken, deleteFavoriteMovie);
 
 

@@ -15,7 +15,8 @@ import { LuView } from "react-icons/lu";
 import StarRating from '../Componets/StarRating';
 import Loading from '../Componets/Loading';
 import ErrorContainer from '../Componets/ErrorContainer';
-import {fetchFavoriteMovies} from "../features/WatchList/watchList";
+import toast from 'react-hot-toast';
+import axiosInstance from '../Constant/Backend/axiosInstance';
 
 
 const Details = () => {
@@ -36,9 +37,24 @@ const Details = () => {
     dispatch(fetchMovieVideos(id));
   },[dispatch, id]);
 
-  const handleWatchList = (movie) => {
-    dispatch(fetchFavoriteMovies(movie));
-    // console.log(movie);
+  const handleWatchList = async(movie) => {
+    // dispatch(fetchFavoriteMovies(movie));
+    try {
+      const response = await axiosInstance.post('/api/movie/addFavorite', {
+        movieData : movie
+      });
+    
+      if(response.data.success === false){
+        toast.error("This movie is already in the favorites list");
+      }
+
+      toast.success(response.data.success);
+
+      // console.log(response);
+      
+    } catch (error) {
+      toast.error(error.message);
+  }
   }
 
 
@@ -156,13 +172,13 @@ const Details = () => {
                <FaUserFriends className='text-3xl text-red-500' />
                <h3 className='text-3xl font-bold'>Casts</h3>
              </div>
-             <div className='grid grid-cols-2 md:grid-cols-5 gap-5 mt-5'>
+             <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-5 mt-5'>
               {
                 selectedCast.cast.slice(0,5).map((cast) => (
-                  <Link to={`/actor/${cast.id}`} className='flex flex-col bg-[#070d37a8] border-2 border-[#262e6e8f] w-32 md:w-56 rounded-lg p-3 cursor-pointer'>
+                  <Link to={`/actor/${cast.id}`} className='flex flex-col bg-[#070d37a8] border-2 border-[#262e6e8f] w-32 sm:w-44 md:w-56 rounded-lg p-3 cursor-pointer'>
                     <img src={cast.profile_path === null ? "https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png" : 
                     `${IMAGE_BASE_URL}${cast.profile_path}`} loading='lazy' alt={cast.original_name}
-                    className='w-32 h-32 md:w-56 md:h-56 rounded-md'/>
+                    className='w-36 h-28 sm:w-44 sm:h-44 md:w-56 md:h-56 rounded-md'/>
                     <h2 className='text-center text-[#cacaca]  mt-2'>{cast.original_name}</h2>
                     <i className='text-center text-[#cacaca] '>as</i>
                     <i className='text-center text-[#7c7c7c]  mt-1 font-serif'>{cast.character}</i>
@@ -177,13 +193,13 @@ const Details = () => {
                <FaUserFriends className='text-3xl text-red-500' />
                <h3 className='text-3xl font-bold'>Crew</h3>
              </div>
-             <div className='grid grid-cols-2 md:grid-cols-5 gap-5 mt-5'>
+             <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-5 mt-5'>
               {
                 selectedCast.crew.slice(0,5).map((crew) => (
-                  <Link to={`/actor/${crew.id}`} className='flex flex-col bg-[#070d37a8] border-2 border-[#262e6e8f] w-32 md:w-56 rounded-lg p-3 cursor-pointer'>
+                  <Link to={`/actor/${crew.id}`} className='flex flex-col bg-[#070d37a8] border-2 border-[#262e6e8f] w-32 sm:w-44 md:w-56 rounded-lg p-3 cursor-pointer'>
                     <img src={crew.profile_path === null ? "https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png" : 
                     `${IMAGE_BASE_URL}${crew.profile_path}`} loading='lazy' alt={crew.original_name}
-                    className='w-32 h-32 md:w-56 md:h-56 rounded-md'/>
+                    className='w-36 h-28 sm:w-44 sm:h-44 md:w-56 md:h-56 rounded-md'/>
                     <h2 className='text-center text-[#cacaca] mt-2'>{crew.original_name}</h2>
                     <i className='text-center text-[#7c7c7c] mt-1 font-serif'>({crew.job})</i>
                   </Link>

@@ -20,6 +20,7 @@ app.use(cookieParser());
 
 app.use(cors({
     origin : ["https://movie-streaming-app-frontend.vercel.app"],
+    // origin : [""],
     methods : ['GET', 'POST'],
     credentials : true
 }));

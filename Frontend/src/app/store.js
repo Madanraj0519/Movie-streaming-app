@@ -4,7 +4,6 @@ import userAuthReducer from "../features/Auth/userAuthSlice";
 import moviesReducer from "../features/Movie/MoviesSlice";
 import movieDetailReducer from "../features/Movie/movieDetail";
 import movieVideoReducer from "../features/Movie/movieVideo";
-import watchListReducer from "../features/WatchList/watchList";
 import SearchReducer from "../features/Movie/searchMovie";
 import castReducer from "../features/Movie/castSlice";
 import actorReducer from "../features/Movie/actorDetails";
@@ -17,7 +16,6 @@ const rootReducer = combineReducers({
         movies: moviesReducer,
         movieDetail: movieDetailReducer,
         movieVideos: movieVideoReducer,
-        watchList : watchListReducer,
         search: SearchReducer,
         castDetails : castReducer,
         actorDetails : actorReducer,
