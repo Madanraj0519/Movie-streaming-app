@@ -48,26 +48,28 @@ const addFavoriteMovies = async(req, res, next) => {
         
         // console.log(favoriteMovie);
 
-        if(favoriteMovie){
-            res.status(400).json({
+      if(favoriteMovie){
+          res.status(400).json({
             success: false,
             message : "This movie has already been added",
           })
-        }
-
+        }else{
         const movie = new favoriteModel(
-           {
-            userId,
-            movieData
-           }
-        );
-       await movie.save();
+          {
+           userId,
+           movieData,
+          }
+       );
+      await movie.save();
 
-       res.status(201).json({ 
-         success : true,
-         message: 'Movie saved successfully', 
-         movie 
-        });
+      res.status(201).json({ 
+        success : true,
+        message: 'Movie saved successfully', 
+        movie 
+       });
+      }
+      
+
       } catch (error) {
          next(error);
       }
@@ -100,5 +102,5 @@ const deleteFavoriteMovie = async (req, res, next) => {
 module.exports = {
     addFavoriteMovies,
     fetchFavoriteMovies,
-    deleteFavoriteMovie
+    deleteFavoriteMovie,
 }

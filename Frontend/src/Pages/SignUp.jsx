@@ -73,7 +73,7 @@ const SignUp = () => {
   return (
     <div className='container w-full overflow-hidden flex flex-col text-center'>
         <div  className='md:w-2/6 mx-auto pt-2 mt-10 border-2 bg-[#e4dfdf2e] rounded-lg border-[#e4dfdf8c] p-4'>
-          <h1 className='text-3xl text-center font-semibold my-7'>Sign In</h1>
+          <h1 className='text-3xl text-center font-semibold my-7'>Sign Up</h1>
            <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
                 <input type='text' placeholder='User Name' value={userName} 
                 onChange={(e) => setUserName(e.target.value)} id='userName' className=' p-3 rounded-lg' />

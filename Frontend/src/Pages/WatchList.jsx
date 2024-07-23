@@ -43,7 +43,7 @@ const WatchList = () => {
           setError(response.data.message);
         }
   
-        toast.success("Movie added successfully");
+        toast.success(response.data.message);
         setIsDeleted(!isDeleted);
         navigate("/watchlist");
   

@@ -44,16 +44,16 @@ const Details = () => {
         movieData : movie
       });
     
-      if(response.data.success === false){
+      if(!response){
         toast.error("This movie is already in the favorites list");
       }
 
-      toast.success(response.data.success);
+      toast.success("Movie added successfully");
 
       // console.log(response);
       
     } catch (error) {
-      toast.error(error.message);
+      toast.error("This movie is already in the favorite list");
   }
   }
 
