@@ -26,7 +26,7 @@ const Details = () => {
   const {selectedCast, loading : castLoading, error: castError, } = useSelector((state) => state.castDetails);
 
 
-  console.log(selectedMovie);
+  // console.log(selectedMovie);
   // console.log(selectedCast);
   // console.log(actorDetails);
 
@@ -38,7 +38,7 @@ const Details = () => {
 
   const handleWatchList = (movie) => {
     dispatch(fetchFavoriteMovies(movie));
-    console.log(movie);
+    // console.log(movie);
   }
 
 

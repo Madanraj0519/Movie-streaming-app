@@ -14,14 +14,28 @@ const WatchList = () => {
     const dispatch  = useDispatch();
     const [userError, setError] = useState(null);
     const [isDeleted, setIsDeleted] = useState(false);
+    const [data, setData] = useState([]);
     const navigate = useNavigate();
 
     const { watchListMovies } = useSelector((state) => state.watchList);
-    // console.log(watchListMovies.favorite);
+    console.log(watchListMovies);
 
     useEffect(() => {
       dispatch(fetchWatchListMovies());
-    }, [dispatch, isDeleted]);
+
+      const fetchWatchListMovies = async() => {
+
+        try {
+          const response = await axiosInstance.get('/api/movie/getFavorite');
+          setData(response.data);
+       } catch (error) {
+           return error.message;
+       }
+
+      }
+    }, [dispatch]);
+
+    console.log(data);
 
 
     const deleteWatchList = async(movieId) => {
@@ -45,7 +59,7 @@ const WatchList = () => {
   return (
    <>
     {
-      watchListMovies.favorite.length > 0 ? (
+      watchListMovies ? (
         <div className='scroll grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 overflow-x-auto overflow-clip gap-8
      scrollbar-none scroll-smooth pt-4 px-8 pb-4'>
      {
