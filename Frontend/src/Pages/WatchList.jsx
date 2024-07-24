@@ -1,71 +1,55 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import {AiTwotoneDelete} from "react-icons/ai";
 import {toast} from "react-hot-toast";
 import axiosInstance from "../Constant/Backend/axiosInstance";
 import { FaHandPointLeft } from "react-icons/fa6";
-import { BASE_BACKEND_URL } from '../Constant/Backend/constant';
-import { useSelector } from 'react-redux';
+import {signInStart, signInSuccess, signInFailure} from "../features/Auth/userAuthSlice";
+import { useDispatch, useSelector } from 'react-redux';
 const IMAGE_BASE_URL="https://image.tmdb.org/t/p/original";
 
 
 const WatchList = () => {
 
-    const [userError, setError] = useState(null);
-    const [isDeleted, setIsDeleted] = useState(false);
-    const [data, setData] = useState([]);
-    const navigate = useNavigate();
 
-    const { currentUser } = useSelector(state => state.authUser);
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector(state => state.authUser);
 
-    // console.log(currentUser.user._id);
+  // console.log(currentUser.user.favorites[0]._id);
 
-    useEffect(() => {
-      const fetchMovies = async() => {
-        const res = await fetch(`${BASE_BACKEND_URL}/api/movie/getFavorite/${currentUser.user._id}`);
-        const data = await res.json();
-        setData(data.favorite);
-      }
-
-      fetchMovies();
-
-    }, [isDeleted]);
-
-    // console.log(data);
-
-
-    const deleteWatchList = async(movieId) => {
+  const deleteWatchList = async(movieId) => {
       try{
+        dispatch(signInStart());
         const response = await axiosInstance.delete(`/api/movie/deleteFavorite/${movieId}`);
   
         if(!response){
+          dispatch(signInFailure(response.data));
           toast.error(response.data.message);
-          setError(response.data.message);
         }
   
+        dispatch(signInSuccess(response.data));
         toast.success(response.data.message);
-        setIsDeleted(!isDeleted);
-        navigate("/watchlist");
   
       }catch (error) {
-        setError(error.message);
+        dispatch(signInFailure(error));
+        toast.error(error.message);
       }
     }
 
   return (
    <>
     {
-      data.length > 0 ? (
+      currentUser.user.favorites.length > 0 ? (
         <div className='scroll grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 overflow-x-auto overflow-clip gap-8
      scrollbar-none scroll-smooth pt-4 px-8 pb-4'>
      {
-        data.map((movie) => (
+        currentUser.user.favorites.map((movie) => (
       <div className='relative'>
-        <Link to={`/detail/${movie.movieData.id}`}>
+        <Link to={`/detail/${movie.movie.id}`}>
           <div className='w-[110px] md:w-[200px] rounded-lg relative
             hover:border-[3px] border-gray-400 cursor-pointer
-            hover:scale-110 transition-all duration-150 ease-in' key={movie.movieData.id}>
-            <img src={IMAGE_BASE_URL+movie.movieData.poster_path} loading='lazy' alt='' />
+            hover:scale-110 transition-all duration-150 ease-in' key={movie.movie.id}>
+            <img src={IMAGE_BASE_URL+movie.movie.poster_path} loading='lazy' alt='' />
           </div>
         </Link>
         <div className='absolute -bottom-3 -right-1 w-12 h-12 p-2 cursor-pointer
