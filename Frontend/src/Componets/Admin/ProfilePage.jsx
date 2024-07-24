@@ -96,6 +96,7 @@ const ProfilePage = ({ active }) => {
 
       dispatch(signInSuccess(null));
       toast.success(response.data.message);
+      localStorage.clear();
       navigate("/");
 
     }catch (error) {
