@@ -19,6 +19,11 @@ const userModel = mongoose.Schema({
     url : {
         type : String,
     },
+    favorites : [
+        {
+            movie : Object,
+        }
+    ],
     createdOn : {
         type : Date,
         default : new Date().getTime(),

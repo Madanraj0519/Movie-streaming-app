@@ -1,4 +1,6 @@
+const { response } = require('express');
 const favoriteModel = require('../models/favorite.model');
+const userModel = require('../models/user.model');
 const errorHandler = require("../utilities/errorHandler");
 
 
@@ -39,35 +41,43 @@ const addFavoriteMovies = async(req, res, next) => {
         const { movieData } = req.body;
         let userId = req.user.id;
         let movieId = movieData.id;
-        // console.log(movieId);
-        // console.log(userId);
 
-        const favoriteMovie = await favoriteModel.findOne({
-          "movieData.id" : movieId,
-        });
-        
-        // console.log(favoriteMovie);
+        const user = await userModel.findById(userId);
 
-      if(favoriteMovie){
-          res.status(400).json({
+        // console.log(user.favorites);
+
+        if(!user){
+          return res.status(404).json({
             success: false,
-            message : "This movie has already been added",
+            message: "User not found",
           })
-        }else{
-        const movie = new favoriteModel(
-          {
-           userId,
-           movieData,
-          }
-       );
-      await movie.save();
+        }
 
-      res.status(201).json({ 
-        success : true,
-        message: 'Movie saved successfully', 
-        movie 
-       });
-      }
+
+        const existingFavorite = user.favorites.find( movie => movie.movie.id === movieId);
+
+        // console.log(existingFavorite);
+        // console.log("user", user.favorites._id);
+
+        if(existingFavorite){
+          return res.status(400).json({
+            success : false,
+            message : "Movie already exists in your favorites"
+          });
+        }
+
+        user.favorites.push({ movie : movieData });
+
+        await user.save();
+
+
+        // console.log(user);
+
+        res.status(200).json({
+          success : true,
+          message : "Movie successfully added",
+          user,
+        });
       
 
       } catch (error) {
@@ -78,19 +88,39 @@ const addFavoriteMovies = async(req, res, next) => {
 
 const deleteFavoriteMovie = async (req, res, next) => {
   
-  // if(req.user.id !== req.params.id){
-  //   return next(errorHandler(401, "You can delete movies only on your account!"));
-  // }
+  let userId = req.user.id;
+  let { id } = req.params;
+
+  console.log(id);
 
   try {
 
-    await favoriteModel.findByIdAndDelete(req.params.id);
+   const user = await userModel.findById(userId);
 
-    res.status(200).
-    json({
-        success : true,
-        message : "Movie has been deleted successfully",
+   if(!user){
+    return res.status(404).json({ 
+      success : false,
+      message : "User not found",
     });
+   }
+
+   const updateFavorites = user.favorites.filter(movie => String(movie._id) !== id);
+
+  //  console.log(updateFavorites);
+
+   if(updateFavorites.length === user.favorites.length){
+    return res.status(404).json({ success : false, message : "Movie not found"});
+   }
+
+   user.favorites = updateFavorites;
+
+   await user.save();
+
+   res.status(200).json({
+    success : true,
+    message : "Movie deleted successfully",
+    user,
+   });
 
   } catch (error) {
     next(error);

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { fetchMovieDetails } from '../features/Movie/movieDetail';
 import {fetchMovieVideos} from "../features/Movie/movieVideo";
 import {fetchCastFromMovie} from "../features/Movie/castSlice";
+import {signInStart, signInSuccess, signInFailure} from "../features/Auth/userAuthSlice";
 import {FaRegPlayCircle} from "react-icons/fa";
 import { IoCalendarOutline } from "react-icons/io5";
 import { CiClock1 } from "react-icons/ci";
@@ -40,19 +41,23 @@ const Details = () => {
   const handleWatchList = async(movie) => {
     // dispatch(fetchFavoriteMovies(movie));
     try {
+      dispatch(signInStart());
       const response = await axiosInstance.post('/api/movie/addFavorite', {
         movieData : movie
       });
     
       if(!response){
+        dispatch(signInFailure(response.data));
         toast.error("This movie is already in the favorites list");
       }
 
+      dispatch(signInSuccess(response.data));
       toast.success("Movie added successfully");
 
       // console.log(response);
       
     } catch (error) {
+      dispatch(signInFailure(error));
       toast.error("This movie is already in the favorite list");
   }
   }
