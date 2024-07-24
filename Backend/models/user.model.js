@@ -24,6 +24,12 @@ const userModel = mongoose.Schema({
             movie : Object,
         }
     ],
+    subscription : {
+        id : {
+            type : String,
+        },
+        
+    },
     createdOn : {
         type : Date,
         default : new Date().getTime(),

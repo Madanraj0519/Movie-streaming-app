@@ -26,7 +26,7 @@ const Login = () => {
   
 
   return (
-    <div className='relative w-full h-full'>
+    <div className='relative w-full h-full bg-black'>
       <div className='relative top-0 left-0 w-full h-full bg-[#0f0e0eea]'></div>
         <video className='fixed w-full h-screen object-cover' src={bgVideos[randomIndex]} autoPlay loop muted/>
        <div className='absolute w-full h-full top-48 flex-col justify-center items-center'>

@@ -5,6 +5,7 @@ import nationalGeo from "../assets/Images/national-geographic.png";
 import Pixar from "../assets/Images/Pixar.webp";
 import star from "../assets/Images/star_war.jpg";
 import { useParams } from 'react-router';
+import { RiMovie2Fill } from "react-icons/ri";
 import { useDispatch, useSelector } from 'react-redux';
 import {fetchProductionMovie} from '../features/Movie/searchMovie'
 import SearchResultContainer from '../Componets/SearchResultContainer';
@@ -84,6 +85,11 @@ const ProductionHouseMovies = () => {
                   src={"https://cdn.celluloidjunkie.com/wp-content/uploads/2021/04/30144535/Paper-vs-Digital-Movie-Posters-Featured.jpg"} /> 
                 )
             }
+        </div>
+
+        <div className='flex items-center gap-4 px-4 md:px-8 py-4 md:py-6'>
+          <RiMovie2Fill className='text-xl md:text-3xl text-red-600' />
+         <h2 className='text-xl md:text-3xl font-semibold'>{id} Collection's</h2>
         </div>
 
         <div className='scroll grid grid-cols-3 md:grid-cols-6 overflow-x-auto overflow-clip gap-4 md:gap-8

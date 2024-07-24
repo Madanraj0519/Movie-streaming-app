@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {AiTwotoneDelete} from "react-icons/ai";
+import { FaHeart } from "react-icons/fa6";
+import { FaX } from "react-icons/fa6";
 import {toast} from "react-hot-toast";
 import axiosInstance from "../Constant/Backend/axiosInstance";
 import { FaHandPointLeft } from "react-icons/fa6";
@@ -37,7 +39,11 @@ const WatchList = () => {
     }
 
   return (
-   <>
+   <div className='w-full h-full py-6'>
+    <div className='flex items-center gap-4 px-6 md:px-8 py-4 md:py-6'>
+      <FaHeart className='text-xl md:text-3xl text-red-600' />
+       <h2 className='text-xl md:text-3xl font-semibold'>Your Favorites</h2>
+    </div>
     {
       currentUser.user.favorites.length > 0 ? (
         <div className='scroll grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 overflow-x-auto overflow-clip gap-8
@@ -52,9 +58,9 @@ const WatchList = () => {
             <img src={IMAGE_BASE_URL+movie.movie.poster_path} loading='lazy' alt='' />
           </div>
         </Link>
-        <div className='absolute -bottom-3 -right-1 w-12 h-12 p-2 cursor-pointer
+        <div className='absolute -top-1 -right-7 md:right-5 w-8 md:w-12 h-8 md:h-12 p-2 md:p-3 cursor-pointer
            rounded-full bg-[#000000d2]' onClick={() => deleteWatchList(movie._id)}>
-          <AiTwotoneDelete className='text-3xl text-white' />
+          <FaX className='md:text-2xl text-white' />
         </div>
        </div>
         ))
@@ -76,7 +82,7 @@ const WatchList = () => {
         </div>
       )
     }
-   </>
+   </div>
   )
 }
 
