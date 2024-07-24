@@ -40,7 +40,7 @@ const WatchList = () => {
    <>
     {
       currentUser.user.favorites.length > 0 ? (
-        <div className='scroll grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 overflow-x-auto overflow-clip gap-8
+        <div className='scroll grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 overflow-x-auto overflow-clip gap-8
      scrollbar-none scroll-smooth pt-4 px-8 pb-4'>
      {
         currentUser.user.favorites.map((movie) => (

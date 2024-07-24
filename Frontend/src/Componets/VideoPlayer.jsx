@@ -7,7 +7,6 @@ import { TbPlayerPlayFilled } from "react-icons/tb";
 import { FaBackwardFast } from "react-icons/fa6";
 import {fetchMovieVideos} from "../features/Movie/movieVideo";
 import { fetchMovieDetails } from '../features/Movie/movieDetail';
-import { Link } from 'react-router-dom';
 import { FaFastForward } from "react-icons/fa";
 import {toast} from "react-hot-toast";
 import Loading from './Loading';
@@ -50,17 +49,19 @@ const VideoPlayer = () => {
         navigate(`/admin/subscription/${id}`);
       }
 
-      if(type === 'forward'){
-        if(nextClip > len){
-          setNextClip(0);
+      if(!showVideo){
+        if(type === 'forward'){
+          if(nextClip > len){
+            setNextClip(0);
+          }else{
+            setNextClip((prev) => prev + 1);
+          }        
         }else{
-          setNextClip((prev) => prev + 1);
-        }        
-      }else{
-        if(nextClip === 0){
-          setNextClip(0);
-        }else{
-          setNextClip((prev) => prev - 1);
+          if(nextClip === 0){
+            setNextClip(0);
+          }else{
+            setNextClip((prev) => prev - 1);
+          }
         }
       }
 
@@ -96,15 +97,31 @@ const VideoPlayer = () => {
             </div>
           ) : 
             currentUser ? (
-              <iframe
-               className="w-full h-[280px] md:h-screen mt-5"
-               src={`https://www.youtube.com/embed/${videos[nextClip].key}?controls=1&autoplay=1&loop=1&mute=1&playlist=${videos[randomVideo].key}`}
-               title="YouTube video player"
-               frameborder="0"
-               onLoad={lazy}
-               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-               allowfullscreen
-               ></iframe>
+              <>
+                {
+                  videos[nextClip] ? (
+                    <iframe
+                     className="w-full h-[280px] md:h-screen mt-5"
+                     src={`https://www.youtube.com/embed/${videos[nextClip]}?controls=1&autoplay=1&loop=1&mute=0&playlist=${videos[randomVideo].key}`}
+                     title="YouTube video player"
+                    frameborder="0"
+                    onLoad={lazy}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    ></iframe>
+                  ) : (
+                    <div className='relative opacity-70'>
+                      <img src={`${IMAGE_BASE_URL}${selectedMovie.backdrop_path
+                     }`} alt={selectedMovie.original_title} loading='lazy'
+                      className='w-full h-[280px] md:h-[100vh] mt-5'/>
+                     <div onClick={()=>setShowVideo(false)} className='absolute top-[100px] left-[100px] md:top-[300px] md:left-[600px] opacity-100
+                        bg-zinc-200 md:w-20 md:h-20 p-5 md:p-4 m-4 rounded-full border border-red-400 cursor-pointer'>
+                      {/* <TbPlayerPlayFilled className=' text-xl md:text-5xl text-red-500' /> */}
+                     </div>
+                    </div>
+                  )
+                }              
+              </>
             ) : (
               handleVideoWatch()
             )
@@ -112,9 +129,9 @@ const VideoPlayer = () => {
        <div className='flex flex-col md:flex-row justify-between md:items-center w-full bg-[#090e3d80] border border-zinc-700 
         rounded-md h-[85px] px-4 mt-5 md:mt-10 p-2'>
           <div className='flex gap-3 md:gap-5 justify-between md:justify-start items-center'>
-              <FaBackwardFast onClick={() => handleForward("backward")} className='text-2xl md:text-3xl cursor-pointer text-zinc-300' />
+              <FaBackwardFast onClick={() => handleForward("backward")} className='text-2xl md:text-3xl cursor-pointer hover:text-red-500 text-zinc-300' />
               <h3 className='text-base md:text-4xl whitespace-nowrap'>{selectedMovie.original_title}</h3>
-              <FaFastForward onClick={() => handleForward("forward")}  className='text-2xl md:text-3xl cursor-pointer text-zinc-300' />
+              <FaFastForward onClick={() => handleForward("forward")}  className='text-2xl md:text-3xl cursor-pointer hover:text-red-500 text-zinc-300' />
           </div>
           <div className='flex gap-1 md:gap-3 justify-between items-center'>
             <div className='bg-zinc-600 p-2 md:p-3 rounded-lg'>

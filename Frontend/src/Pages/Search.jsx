@@ -87,7 +87,7 @@ const Search = () => {
         <div className='px-9 mb-4 text-2xl'>
           <h2 className='font-semibold'>{`Your ${searchType === "movie" ? "Movies" : "Tv Shows"} Search result`}</h2>
         </div>
-        <div className='scroll grid grid-cols-3 md:grid-cols-6 overflow-x-auto overflow-clip ga-4 md:gap-8
+        <div className='scroll grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 overflow-x-auto overflow-clip gap-4 md:gap-8
          scrollbar-none scroll-smooth pt-4 px-2 md:px-8 pb-4'>
        {
        Query !== '' ? 
