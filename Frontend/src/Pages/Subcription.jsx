@@ -3,15 +3,66 @@ import { FaCheck } from "react-icons/fa6";
 import { FaX } from "react-icons/fa6";
 import { MdCurrencyRupee } from "react-icons/md";
 import { BiSolidOffer } from "react-icons/bi";
+import { signInStart, signInSuccess, signInFailure} from "../features/Auth/userAuthSlice"
 import { useNavigate, useParams } from 'react-router';
+import { useDispatch, useSelector} from "react-redux"
 import { Link } from 'react-router-dom';
+import { toast } from "react-hot-toast";
+import  axiosInstance  from "../Constant/Backend/axiosInstance"
 
 const Subcription = () => {
 
     const [active, setActive] = useState(null);
     const {id} = useParams();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [title, setTitle] = useState(null);
+    const [price, setPrice] = useState(null);
+    // const [status, setStatus] = useState(false);
 
+
+    const { currentUser } = useSelector(state => state.authUser);
+    // console.log(currentUser.user.subscription);
+
+
+    const handleSubscription = (active, title, price) => {
+      setActive(active);
+      setTitle(title);
+      setPrice(price);
+    }
+
+    const handleSubmit = async(e) => {
+      e.preventDefault();
+
+      try {
+
+        if(title === null){
+          toast.error("Choose any Subscription");
+        }else{
+          dispatch(signInStart());
+        const response = await axiosInstance.post(`/api/user/updateSubscription/${currentUser.user._id}`, {
+          title: title,
+          price: price,
+          status: true,
+        });
+
+
+        if(response.data.success !== true){
+          dispatch(signInFailure(response.data.message));
+          toast.error(response.data.message);
+        };
+
+        dispatch(signInSuccess(response.data));
+        toast.success(response.data.message);
+        navigate(`/watch/${id}`);
+        }
+        
+
+      } catch (error) {
+        toast.error(error.message);
+      }
+    }
+    
     const subscription = [
         { 
             id : 0,
@@ -108,23 +159,29 @@ const Subcription = () => {
 
                 <div className='p-5 mt-3 md:mt-0 md:p-10'>
                 <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
-                <div onClick={() => setActive(0)} className={`border border-gray-600 cursor-pointer rounded-md ${active === 0 ? "scale-110 transition-all duration-150 text-yellow-600" : ""} `}>
+                <div onClick={() => handleSubscription(0, "Super", "899")} 
+                className={`border ${currentUser.user.subscription.price === "899" ? "pointer-events-none bg-[#a8a7a722]" : ""}
+                 border-gray-600 cursor-pointer rounded-md ${active === 0 ? "scale-110 transition-all duration-150 text-yellow-600" : ""} `}>
                         <div className='p-5 flex flex-col gap-2'>
-                          <h2 className='text-xl font-semibold text-blue-800'>Current Plan</h2>
+                          <h2 className='text-xl font-semibold text-blue-800'>{currentUser.user.subscription.price === "899" ? "Current Plan" : "Upgrade To"}</h2>
                           <h2 className='text-xl font-semibold '>Super</h2>
                           <h2 className='text-2xl font-semibold text-white flex gap-1 items-center'><MdCurrencyRupee />899/Year</h2>
                         </div>
                     </div>
-                    <div onClick={() => setActive(1)} className={`border border-gray-600 cursor-pointer rounded-md ${active === 1 ? "scale-110 transition-all duration-150 text-yellow-600" : ""} `}>
+                    <div onClick={() => handleSubscription(1, "Super", "1099")} 
+                    className={`border ${currentUser.user.subscription.price === "1099" ? "pointer-events-none bg-[#a8a7a722]" : ""}
+                    border-gray-600 cursor-pointer rounded-md ${active === 1 ? "scale-110 transition-all duration-150 text-yellow-600" : ""} `}>
                         <div className='p-5 flex flex-col gap-2'>
-                          <h2 className='text-xl font-semibold text-blue-800'>Upgrade To</h2>
+                          <h2 className={`text-xl font-semibold text-blue-800`}>{currentUser.user.subscription.price === "1099" ? "Current Plan" : "Upgrade To"}</h2>
                           <h2 className='text-xl font-semibold '>Supreme</h2>
                           <h2 className='text-2xl font-semibold text-white flex gap-1 items-center'><MdCurrencyRupee />1099/Year</h2>
                         </div>
                     </div>
-                    <div onClick={() => setActive(2)} className={`border border-gray-600 cursor-pointer rounded-md ${active === 2 ? "scale-110 transition-all duration-150text-yellow-600" : ""} `}>
+                    <div onClick={() => handleSubscription(2, "Super", "1349")} 
+                    className={`border ${currentUser.user.subscription.price === "1349" ? "pointer-events-none bg-[#a8a7a722]" : ""}
+                   border-gray-600 cursor-pointer rounded-md ${active === 2 ? "scale-110 transition-all duration-150 text-yellow-600" : ""} `}>
                         <div className='p-5 flex flex-col gap-2'>
-                          <h2 className='text-xl font-semibold  text-blue-800'>Upgrade To</h2>
+                          <h2 className='text-xl font-semibold  text-blue-800'>{currentUser.user.subscription.price === "1349" ? "Current Plan" : "Upgrade To"}</h2>
                           <h2 className='text-xl font-semibold '>Premium</h2>
                           <h2 className='text-2xl font-semibold text-white flex gap-1 items-center'><MdCurrencyRupee />1349/Year</h2>
                         </div>
@@ -139,7 +196,7 @@ const Subcription = () => {
                         <h2>789/Year</h2>
                     </div>
                     <div className='w-full'>
-                        <button className='w-full bg-blue-800 text-base whitespace-nowrap md:text-xl font-semibold hover:scale-100 duration-90 transition-all'>
+                        <button onClick={handleSubmit} className='w-full bg-blue-800 text-base whitespace-nowrap md:text-xl font-semibold hover:scale-100 duration-90 transition-all'>
                             Upgrade Now
                         </button>
                     </div>

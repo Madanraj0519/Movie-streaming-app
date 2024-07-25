@@ -5,7 +5,7 @@ import { BASE_BACKEND_URL } from "./constant";
 const axiosInstance = axios.create({
     baseURL : BASE_BACKEND_URL,
     timeout : 10000,
-    withCredentials : true,
+    // withCredentials : true,
 });
 
 axiosInstance.interceptors.request.use(

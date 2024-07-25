@@ -25,10 +25,19 @@ const userModel = mongoose.Schema({
         }
     ],
     subscription : {
-        id : {
+        subscriptionId : mongoose.Schema.Types.ObjectId,
+        title : {
             type : String,
+            default : null,
         },
-        
+        price : {
+            type : String,
+            default : null,
+        },
+        status : {
+            type : Boolean,
+            default : false,
+        }
     },
     createdOn : {
         type : Date,

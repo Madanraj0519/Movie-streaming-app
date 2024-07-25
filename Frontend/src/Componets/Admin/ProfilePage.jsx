@@ -12,6 +12,7 @@ import {useNavigate} from "react-router";
 import {signInStart, signInSuccess, signInFailure} from "../../features/Auth/userAuthSlice";
 import {toast} from "react-hot-toast";
 import axiosInstance from "../../Constant/Backend/axiosInstance";
+import moment from 'moment-timezone';
 
 const screenWidth=window.innerWidth;
 
@@ -188,7 +189,7 @@ const ProfilePage = ({ active }) => {
                     className={`${'w-full bg-[#b9b9b9] pointer-events-none border-red-500 border-2 bg-[#07051bed] md:h-14 text-lg active:outline-red-500 p-1 rounded-[5px]'}  text-black !w-[95%] mb-4 md:mb-0`}
                     required
                     placeholder="Current password"
-                    value={password}
+                    value={moment(password).format('MMMM Do YYYY, h:mm:ss a')}
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
