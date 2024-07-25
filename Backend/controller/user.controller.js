@@ -70,6 +70,41 @@ const updateUserAvatar = async(req, res, next) => {
 };
 
 
+const updateSubscription = async (req, res, next) => {
+
+    // if(req.user.id !== req.params.id){
+    //     return next(401, "You can your account subscription only")
+    // }
+
+    const { title, price, status } = req.body;
+
+    try{
+        const user = await userModel.findByIdAndUpdate(
+            req.params.id,
+            {
+                $set : {
+                    "subscription.title" : title,
+                    "subscription.price" : price,
+                    "subscription.status" : status,
+                }
+            },
+            { new : true },    
+        );
+
+        // console.log(user);
+
+        res.status(200).json({
+            success : true,
+            message : "Subscription updated successfully",
+            user,
+        });
+
+    }catch(error){
+        next(error);
+    };
+};
+
+
 const changeUserPassword = async(req, res, next) => {
 
     if(req.user.id !== req.params.id){
@@ -153,5 +188,5 @@ const deleteUser = async(req, res, next) => {
 
 module.exports = {
     updateUser, changeUserPassword,
-    updateUserAvatar, deleteUser
+    updateUserAvatar, deleteUser, updateSubscription,
 }

@@ -28,7 +28,7 @@ const VideoPlayer = () => {
     const randomVideo = Math.floor(Math.random() * videos.length);
     const [showVideo, setShowVideo] = useState(true);
     
-    // console.log(currentUser.user);
+    // console.log(currentUser.user.subscription.status);
 
     useEffect(() => {
       dispatch(fetchMovieDetails(id));
@@ -45,8 +45,10 @@ const VideoPlayer = () => {
     const handleForward = (type) => {
       let len = videos.length;
 
-      if(nextClip >= 1) {
-        navigate(`/admin/subscription/${id}`);
+      if(currentUser.user.subscription.status === false){
+        if(nextClip >= 1) {
+          navigate(`/admin/subscription/${id}`);
+        }
       }
 
       if(!showVideo){
